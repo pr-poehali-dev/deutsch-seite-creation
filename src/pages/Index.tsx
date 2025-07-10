@@ -129,25 +129,74 @@ const Index = () => {
 
   const seminars = [
     {
+      title: "21 Smartphone-Tipps für Senioren",
+      subtitle: "Praktische Smartphone-Hilfe für Einsteiger",
+      date: "12. März 2025",
+      duration: "3 Stunden",
+      level: "Einsteiger",
+      price: "€49",
+      description:
+        "Lernen Sie in entspannter Atmosphäre die wichtigsten Smartphone-Funktionen kennen. Von der Bedienung bis zu WhatsApp - alles Schritt für Schritt erklärt.",
+      highlights: [
+        "Ein/Aus und Laden",
+        "Telefonieren und SMS",
+        "WhatsApp und Kamera",
+        "WLAN einrichten",
+        "Schrift vergrößern",
+        "Sicherheitstipps",
+      ],
+      targetGroup: "Senioren und Smartphone-Neulinge",
+    },
+    {
       title: "Digital Strategy Workshop",
+      subtitle: "Strategische Digitalisierung für Unternehmen",
       date: "15. März 2025",
       duration: "2 Tage",
       level: "Fortgeschritten",
       price: "€899",
+      description:
+        "Entwickeln Sie eine maßgeschneiderte Digitalisierungsstrategie für Ihr Unternehmen.",
+      highlights: [
+        "Digitale Transformation",
+        "Strategieentwicklung",
+        "Technologie-Bewertung",
+        "Change Management",
+      ],
+      targetGroup: "Führungskräfte und Entscheider",
     },
     {
       title: "KI im Unternehmen",
+      subtitle: "Künstliche Intelligenz praktisch anwenden",
       date: "22. März 2025",
       duration: "1 Tag",
       level: "Einsteiger",
       price: "€449",
+      description:
+        "Entdecken Sie die Möglichkeiten von KI für Ihr Unternehmen und lernen Sie praktische Anwendungen kennen.",
+      highlights: [
+        "KI-Grundlagen",
+        "Anwendungsbereiche",
+        "Tool-Übersicht",
+        "Praxisbeispiele",
+      ],
+      targetGroup: "Fachkräfte und Interessierte",
     },
     {
       title: "Agile Transformation",
+      subtitle: "Agile Methoden erfolgreich implementieren",
       date: "5. April 2025",
       duration: "3 Tage",
       level: "Experte",
       price: "€1299",
+      description:
+        "Lernen Sie, wie Sie agile Arbeitsweisen in Ihrem Unternehmen erfolgreich einführen und etablieren.",
+      highlights: [
+        "Scrum & Kanban",
+        "Agile Führung",
+        "Team-Coaching",
+        "Skalierung",
+      ],
+      targetGroup: "Projektleiter und Agile Coaches",
     },
   ];
 
@@ -296,7 +345,7 @@ const Index = () => {
             {seminars.map((seminar, index) => (
               <Card
                 key={index}
-                className="hover:shadow-lg transition-shadow border-gray-200"
+                className="hover:shadow-lg transition-shadow border-gray-200 h-full flex flex-col"
               >
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">
@@ -305,7 +354,14 @@ const Index = () => {
                       {seminar.price}
                     </span>
                   </div>
-                  <CardTitle className="text-xl">{seminar.title}</CardTitle>
+                  <CardTitle className="text-xl mb-2">
+                    {seminar.title}
+                  </CardTitle>
+                  {seminar.subtitle && (
+                    <p className="text-sm text-gray-600 font-medium mb-2">
+                      {seminar.subtitle}
+                    </p>
+                  )}
                   <CardDescription className="text-gray-600">
                     <div className="flex items-center space-x-4 mt-2">
                       <span className="flex items-center">
@@ -319,8 +375,39 @@ const Index = () => {
                     </div>
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <Button className="w-full bg-gray-900 hover:bg-gray-800">
+                <CardContent className="flex-grow flex flex-col">
+                  {seminar.description && (
+                    <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                      {seminar.description}
+                    </p>
+                  )}
+                  {seminar.highlights && (
+                    <div className="mb-4">
+                      <h4 className="font-semibold text-gray-900 mb-2 text-sm">
+                        Das lernen Sie:
+                      </h4>
+                      <ul className="text-xs text-gray-600 space-y-1">
+                        {seminar.highlights.map((highlight, idx) => (
+                          <li key={idx} className="flex items-center">
+                            <Icon
+                              name="Check"
+                              className="h-3 w-3 mr-2 text-green-600"
+                            />
+                            {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {seminar.targetGroup && (
+                    <div className="mb-4">
+                      <Badge variant="secondary" className="text-xs">
+                        <Icon name="Users" className="h-3 w-3 mr-1" />
+                        {seminar.targetGroup}
+                      </Badge>
+                    </div>
+                  )}
+                  <Button className="w-full bg-gray-900 hover:bg-gray-800 mt-auto">
                     Jetzt buchen
                   </Button>
                 </CardContent>
